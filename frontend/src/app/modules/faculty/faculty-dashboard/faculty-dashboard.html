@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0">Faculty Dashboard</h2>
+  <button class="btn btn-primary"><i class="bi bi-calendar-event me-2"></i>Schedule Extra Class</button>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-xl-3 col-sm-6">
+    <app-stats-card title="Classes Today" value="4" icon="bi-easel" color="primary"></app-stats-card>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <app-stats-card title="Total Students" value="180" icon="bi-people" color="success"></app-stats-card>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <app-stats-card title="Pending Marks" value="1 Class" icon="bi-exclamation-square" color="warning"></app-stats-card>
+  </div>
+  <div class="col-xl-3 col-sm-6">
+    <app-stats-card title="Avg. Attendance" value="88%" icon="bi-graph-up" color="info"></app-stats-card>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold">My Subjects</h5>
+        <button class="btn btn-sm btn-light border"><i class="bi bi-filter me-1"></i>Filter</button>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="bg-light text-muted">
+              <tr>
+                <th>Subject Name</th>
+                <th>Course Code</th>
+                <th>Semester</th>
+                <th>Enrolled</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-medium text-dark">Data Structures</td>
+                <td class="text-muted">CS201</td>
+                <td>3rd Sem</td>
+                <td>60</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary me-2" routerLink="/faculty/mark-attendance">Mark
+                    Attendance</button>
+                  <button class="btn btn-sm btn-light border" routerLink="/faculty/upload-marks"><i
+                      class="bi bi-upload"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-medium text-dark">Algorithm Design</td>
+                <td class="text-muted">CS301</td>
+                <td>5th Sem</td>
+                <td>55</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary me-2" routerLink="/faculty/mark-attendance">Mark
+                    Attendance</button>
+                  <button class="btn btn-sm btn-light border" routerLink="/faculty/upload-marks"><i
+                      class="bi bi-upload"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-medium text-dark">Advanced Java</td>
+                <td class="text-muted">CS401</td>
+                <td>7th Sem</td>
+                <td>65</td>
+                <td>
+                  <button class="btn btn-sm btn-outline-primary me-2" routerLink="/faculty/mark-attendance">Mark
+                    Attendance</button>
+                  <button class="btn btn-sm btn-light border" routerLink="/faculty/upload-marks"><i
+                      class="bi bi-upload"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card h-100 border-0 shadow-sm">
+      <div class="card-header bg-white py-3 border-bottom d-flex align-items-center gap-2">
+        <i class="bi bi-calendar3 text-primary-custom"></i>
+        <h5 class="mb-0 fw-bold">Today's Schedule</h5>
+      </div>
+      <div class="card-body p-0">
+        <div class="list-group list-group-flush">
+          <div class="list-group-item p-3 border-bottom border-start border-4 border-primary">
+            <div class="d-flex w-100 justify-content-between mb-1">
+              <h6 class="mb-1 fw-bold text-dark">Data Structures</h6>
+              <small class="text-primary-custom fw-bold">09:00 - 10:30 AM</small>
+            </div>
+            <p class="mb-1 text-muted small"><i class="bi bi-geo-alt me-1"></i> Room 302, Block A</p>
+            <p class="mb-0 text-muted small"><i class="bi bi-people me-1"></i> 3rd Sem CS</p>
+          </div>
+          <div class="list-group-item p-3 border-bottom border-start border-4 border-warning">
+            <div class="d-flex w-100 justify-content-between mb-1">
+              <h6 class="mb-1 fw-bold text-dark">Algorithm Design</h6>
+              <small class="text-warning fw-bold">11:30 - 01:00 PM</small>
+            </div>
+            <p class="mb-1 text-muted small"><i class="bi bi-geo-alt me-1"></i> Room 305, Block A</p>
+            <p class="mb-0 text-muted small"><i class="bi bi-people me-1"></i> 5th Sem CS</p>
+          </div>
+          <div class="list-group-item p-3 border-start border-4 border-success">
+            <div class="d-flex w-100 justify-content-between mb-1">
+              <h6 class="mb-1 fw-bold text-dark">Lab Session (Adv. Java)</h6>
+              <small class="text-success fw-bold">02:00 - 04:00 PM</small>
+            </div>
+            <p class="mb-1 text-muted small"><i class="bi bi-geo-alt me-1"></i> Lab 3, Block C</p>
+            <p class="mb-0 text-muted small"><i class="bi bi-people me-1"></i> 7th Sem CS</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mt-0 mb-4">
+  <div class="col-12">
+    <div class="card border-0 shadow-sm border-start border-4 border-danger">
+      <div class="card-header bg-white py-3 border-bottom d-flex align-items-center gap-2">
+        <i class="bi bi-bell-fill text-danger"></i>
+        <h5 class="mb-0 fw-bold">Important Notices</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0 border-0 d-flex gap-3 align-items-start">
+            <i class="bi bi-info-circle-fill text-primary mt-1"></i>
+            <div>
+              <h6 class="mb-1 fw-bold">Faculty Meeting on Friday</h6>
+              <p class="mb-0 text-muted small">There will be a mandatory faculty meeting this Friday at 4:00 PM in the
+                main conference room.</p>
+              <small class="text-muted mt-1 d-block">Posted: Today</small>
+            </div>
+          </li>
+          <li class="list-group-item px-0 border-0 d-flex gap-3 align-items-start mt-2 border-top pt-3">
+            <i class="bi bi-exclamation-triangle-fill text-warning mt-1"></i>
+            <div>
+              <h6 class="mb-1 fw-bold">Marks Upload Deadline</h6>
+              <p class="mb-0 text-muted small">Please ensure all mid-semester marks are uploaded to the system by the
+                end of next week.</p>
+              <small class="text-muted mt-1 d-block">Posted: 2 days ago</small>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

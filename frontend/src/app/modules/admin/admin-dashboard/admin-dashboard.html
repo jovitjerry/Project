@@ -1,0 +1,148 @@
+<div class="animate-slide-up">
+  <!-- Header -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+    <div>
+      <h2 class="fw-800 text-slate-900 mb-1">Administrative Overview</h2>
+      <p class="text-slate-500 mb-0">System performance and academic metrics for May 2026.</p>
+    </div>
+    <div class="d-flex gap-3">
+      <button class="btn btn-premium bg-white border border-slate-200 text-slate-700 shadow-sm d-flex align-items-center gap-2">
+        <i class="bi bi-download"></i> Generate Report
+      </button>
+      <button class="btn btn-premium btn-premium-primary d-flex align-items-center gap-2">
+        <i class="bi bi-plus-lg"></i> Register New
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="row g-4 mb-5">
+    <div class="col-xl-3 col-md-6">
+      <app-stats-card title="Total Enrollment" [value]="stats().total_students" icon="bi-people-fill" color="accent"></app-stats-card>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <app-stats-card title="Active Faculty" [value]="stats().total_teachers" icon="bi-person-badge-fill" color="highlight"></app-stats-card>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <app-stats-card title="Course Catalog" [value]="stats().total_courses" icon="bi-journal-bookmark-fill" color="warning"></app-stats-card>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <app-stats-card title="Avg. Attendance" [value]="stats().attendance_percentage + '%'" icon="bi-calendar-check-fill" color="success"></app-stats-card>
+    </div>
+  </div>
+
+  <div class="row g-5">
+    <!-- Recent Admissions -->
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold text-slate-900 mb-0">Recent Admissions</h4>
+        <a href="#" class="text-accent fw-bold small text-decoration-none">Review all applications</a>
+      </div>
+      
+      <div class="table-responsive">
+        <table class="table-premium">
+          <thead>
+            <tr>
+              <th>Student Identity</th>
+              <th>Department</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of recentStudents()" class="animate-slide-up">
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="avatar shadow-sm" style="width: 48px; height: 48px; border-radius: 12px; background: var(--grad-soft); color: var(--cms-accent); display: flex; align-items: center; justify-content: center; font-weight: 800;">
+                    {{ student.name.charAt(0) }}
+                  </div>
+                  <div>
+                    <div class="fw-800 text-slate-900">{{ student.name }}</div>
+                    <div class="text-slate-400 smaller">ID: {{ student.student_id }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="text-slate-700 fw-600">{{ student.department }}</div>
+                <div class="text-slate-400 smaller">Semester {{ student.semester }}</div>
+              </td>
+              <td>
+                <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-20 px-3 py-2 rounded-3">Verified</span>
+              </td>
+              <td>
+                <button class="btn btn-link text-slate-400 p-0 border-0"><i class="bi bi-three-dots-vertical fs-5"></i></button>
+              </td>
+            </tr>
+            <tr *ngIf="recentStudents().length === 0">
+              <td colspan="4" class="text-center py-5">
+                <div class="text-slate-300 mb-2"><i class="bi bi-database-exclamation fs-1"></i></div>
+                <p class="text-slate-500">No recent admission records found.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="col-lg-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold text-slate-900 mb-0">System Alerts</h4>
+        <button class="btn btn-link text-accent p-0 border-0"><i class="bi bi-plus-circle-fill fs-5"></i></button>
+      </div>
+
+      <div class="announcement-stack d-flex flex-column gap-3">
+        <div *ngFor="let notice of notices().slice(0, 4)" 
+             class="card-premium p-4 cursor-pointer" 
+             (click)="showNoticeDetails(notice)" data-bs-toggle="modal" data-bs-target="#adminNoticeModal">
+          <div class="d-flex justify-content-between align-items-start mb-3">
+            <span class="badge rounded-pill px-3 py-1" 
+                  [ngClass]="{
+                    'bg-danger bg-opacity-10 text-danger border border-danger border-opacity-20': notice.type === 'Urgent', 
+                    'bg-accent bg-opacity-10 text-accent border border-accent border-opacity-20': notice.type === 'Info', 
+                    'bg-warning bg-opacity-10 text-warning border border-warning border-opacity-20': notice.type === 'Important'
+                  }">
+              {{ notice.type }}
+            </span>
+            <small class="text-slate-400 fw-bold">{{ notice.date }}</small>
+          </div>
+          <h6 class="fw-800 text-slate-900 mb-2">{{ notice.title }}</h6>
+          <p class="text-slate-500 small mb-0 text-truncate-2">{{ notice.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reusable Notice Modal -->
+<div class="modal fade" id="adminNoticeModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-xl" style="border-radius: 24px;">
+      <div class="modal-header border-0 pb-0 p-4">
+        <h5 class="fw-800 mb-0">Notice Detail</h5>
+        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4 pt-2" *ngIf="selectedNotice()">
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <div class="p-3 bg-slate-100 rounded-4 text-accent">
+            <i class="bi bi-megaphone-fill fs-3"></i>
+          </div>
+          <div>
+            <h4 class="fw-800 text-slate-900 mb-1">{{ selectedNotice().title }}</h4>
+            <div class="text-slate-400 small fw-bold text-uppercase">{{ selectedNotice().type }} • {{ selectedNotice().date }}</div>
+          </div>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-4 text-slate-600 mb-4" style="line-height: 1.7;">
+          {{ selectedNotice().description }}
+        </div>
+        <div class="alert alert-info border-0 bg-info bg-opacity-10 text-info d-flex align-items-center gap-3 rounded-4">
+          <i class="bi bi-info-circle-fill fs-4"></i>
+          <small class="fw-bold">This is a system-wide announcement visible to all selected roles.</small>
+        </div>
+      </div>
+      <div class="modal-footer border-0 p-4">
+        <button type="button" class="btn btn-premium w-100 bg-slate-900 text-white shadow-lg" data-bs-dismiss="modal">Confirm Receipt</button>
+      </div>
+    </div>
+  </div>
+</div>

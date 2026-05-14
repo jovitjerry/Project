@@ -1,0 +1,12 @@
+<div class="stat-card-premium">
+  <div class="icon-box" [ngClass]="'text-' + color()">
+    <i [class]="'bi ' + icon()"></i>
+  </div>
+  <div class="value">{{ value() }}</div>
+  <div class="label">{{ title() }}</div>
+  
+  <!-- Decorative Background Element -->
+  <div class="position-absolute" style="right: -10px; bottom: -10px; opacity: 0.05; pointer-events: none;">
+    <i [class]="'bi ' + icon()" style="font-size: 80px;"></i>
+  </div>
+</div>

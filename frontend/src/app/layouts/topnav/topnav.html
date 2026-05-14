@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg topnav-premium">
+  <div class="container-fluid px-0">
+    <div class="d-flex align-items-center gap-3">
+      <nav aria-label="breadcrumb" class="d-none d-md-block">
+        <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-slate-400">RSET</a></li>
+          <li class="breadcrumb-item active fw-medium text-slate-900" aria-current="page">Portal</li>
+        </ol>
+      </nav>
+    </div>
+    
+    <div class="ms-auto d-flex align-items-center gap-4">
+      <!-- Search bar -->
+      <div class="input-group d-none d-lg-flex" style="width: 300px;">
+        <span class="input-group-text border-0 bg-slate-100" style="border-radius: 12px 0 0 12px;">
+          <i class="bi bi-search text-slate-400"></i>
+        </span>
+        <input type="text" class="form-control border-0 bg-slate-100 shadow-none ps-0" 
+               placeholder="Search students, faculty..." 
+               style="border-radius: 0 12px 12px 0; font-size: 0.875rem;">
+      </div>
+
+      <!-- Notifications -->
+      <div class="dropdown">
+        <button class="btn btn-link position-relative p-2 text-slate-600 border-0" type="button" data-bs-toggle="dropdown">
+          <i class="bi bi-bell-fill fs-5"></i>
+          <span class="position-absolute top-0 start-100 translate-middle p-1 bg-accent border border-white rounded-circle" 
+                style="background-color: var(--cms-accent); margin-left: -10px; margin-top: 10px;"></span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end shadow-xl border-0 mt-3 p-0" style="width: 320px; border-radius: 16px; overflow: hidden;">
+          <div class="p-3 bg-slate-50 border-bottom">
+            <h6 class="mb-0 fw-bold">Recent Notifications</h6>
+          </div>
+          <div class="overflow-auto" style="max-height: 350px;">
+            <div *ngFor="let notice of notices()" class="p-3 border-bottom hover-bg-slate-50 cursor-pointer" 
+                 data-bs-toggle="modal" data-bs-target="#topnavNoticeModal" (click)="showNoticeDetails(notice)">
+              <div class="d-flex justify-content-between mb-1">
+                <span class="fw-bold small">{{ notice.title }}</span>
+                <span class="text-slate-400 smaller">{{ notice.date }}</span>
+              </div>
+              <p class="text-slate-500 small mb-0 text-truncate">{{ notice.description }}</p>
+            </div>
+          </div>
+          <div class="p-2 text-center bg-slate-50">
+            <a href="#" class="text-accent small fw-bold text-decoration-none">View all activity</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Profile -->
+      <div class="dropdown">
+        <button class="btn border-0 p-0 d-flex align-items-center gap-3" type="button" data-bs-toggle="dropdown">
+          <div class="text-end d-none d-sm-block">
+            <div class="fw-bold text-slate-900 small">{{ userName() }}</div>
+            <div class="text-slate-500 smaller text-uppercase fw-bold">{{ userRole() }}</div>
+          </div>
+          <img src="https://ui-avatars.com/api/?name={{userName()}}&background=06B6D4&color=fff" 
+               alt="User" class="rounded-circle shadow-sm" width="40" height="40">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow-xl border-0 mt-3 p-2" style="border-radius: 12px; min-width: 200px;">
+          <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2" href="#">
+            <i class="bi bi-person text-slate-400"></i> My Profile</a></li>
+          <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2" href="#">
+            <i class="bi bi-gear text-slate-400"></i> Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item rounded-3 p-2 text-danger d-flex align-items-center gap-2" href="javascript:void(0)" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="topnavNoticeModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-xl" style="border-radius: 20px;">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4 pt-0 text-center" *ngIf="selectedNotice()">
+        <div class="icon-box mx-auto mb-3 text-accent" style="width: 64px; height: 64px; background: var(--grad-soft); border-radius: 20px; display: flex; align-items: center; justify-content: center;">
+          <i class="bi bi-megaphone-fill fs-2"></i>
+        </div>
+        <h4 class="fw-bold mb-1">{{ selectedNotice().title }}</h4>
+        <div class="text-slate-400 small mb-4">{{ selectedNotice().date }} • {{ selectedNotice().type }}</div>
+        <div class="p-4 bg-slate-50 rounded-4 text-start text-slate-600" style="line-height: 1.6;">
+          {{ selectedNotice().description }}
+        </div>
+      </div>
+      <div class="modal-footer border-0 p-4">
+        <button type="button" class="btn btn-premium w-100 bg-slate-900 text-white" data-bs-dismiss="modal">Acknowledge</button>
+      </div>
+    </div>
+  </div>
+</div>

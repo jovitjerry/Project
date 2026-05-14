@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="fw-bold mb-0">Upload Marks</h2>
+  <button class="btn btn-primary" (click)="submitMarks()" [disabled]="isLoading()">
+    <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
+    Submit Marks
+  </button>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <label class="form-label text-muted small fw-medium">Select Course</label>
+    <select class="form-select shadow-sm border-light" [ngModel]="selectedCourseId()" (ngModelChange)="selectedCourseId.set($event)">
+      <option [ngValue]="null">Choose a Course...</option>
+      <option *ngFor="let course of courses()" [value]="course.id">{{ course.course_name }} ({{ course.course_code }})</option>
+    </select>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="bg-light text-muted">
+          <tr>
+            <th>Student Name</th>
+            <th>Department</th>
+            <th>Marks (Out of 100)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students()">
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <img src="https://ui-avatars.com/api/?name={{student.name.split(' ').join('+')}}&background=random" class="rounded-circle" width="32" height="32">
+                <div>
+                  <div class="fw-medium text-dark">{{ student.name }}</div>
+                  <div class="text-muted small">{{ student.student_id }}</div>
+                </div>
+              </div>
+            </td>
+            <td>{{ student.department }}</td>
+            <td>
+              <input type="number" class="form-control form-control-sm w-50 shadow-sm border-light" 
+                     [ngModel]="marksMap()[student.id]" (ngModelChange)="updateMark(student.id, $event)" 
+                     min="0" max="100">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

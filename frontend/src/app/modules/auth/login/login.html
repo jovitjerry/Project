@@ -1,0 +1,92 @@
+<div class="row w-100 g-0 overflow-hidden shadow-xl" style="max-width: 1100px; min-height: 680px; border-radius: 32px;">
+  <!-- Left Side: Visual/Branding -->
+  <div class="col-lg-6 d-none d-lg-flex flex-column align-items-center justify-content-center p-5 text-white position-relative overflow-hidden" 
+       style="background: var(--cms-primary);">
+    <!-- Decorative Gradients -->
+    <div class="position-absolute w-100 h-100 top-0 start-0 opacity-50">
+      <div style="position: absolute; top: -10%; right: -10%; width: 400px; height: 400px; background: var(--cms-accent); filter: blur(120px); border-radius: 50%;"></div>
+      <div style="position: absolute; bottom: -10%; left: -10%; width: 300px; height: 300px; background: var(--cms-highlight); filter: blur(100px); border-radius: 50%;"></div>
+    </div>
+    
+    <div class="text-center position-relative z-1 animate-slide-up">
+      <div class="mb-5 d-inline-flex p-4 glass rounded-4 shadow-2xl">
+        <i class="bi bi-mortarboard-fill text-accent" style="font-size: 3.5rem;"></i>
+      </div>
+      <h1 class="display-5 fw-800 mb-3 tracking-tighter">CMS PRO</h1>
+      <p class="lead mb-0 text-slate-400 px-4 fw-500">The next-generation enterprise resource planner for modern educational institutions.</p>
+      
+      <div class="mt-5 d-flex gap-4 justify-content-center">
+        <div class="text-center">
+          <div class="fw-800 fs-4">12k+</div>
+          <div class="smaller text-uppercase tracking-widest text-slate-500">Students</div>
+        </div>
+        <div class="vr bg-slate-700"></div>
+        <div class="text-center">
+          <div class="fw-800 fs-4">800+</div>
+          <div class="smaller text-uppercase tracking-widest text-slate-500">Faculty</div>
+        </div>
+        <div class="vr bg-slate-700"></div>
+        <div class="text-center">
+          <div class="fw-800 fs-4">98%</div>
+          <div class="smaller text-uppercase tracking-widest text-slate-500">Efficiency</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Right Side: Login Form -->
+  <div class="col-lg-6 d-flex align-items-center justify-content-center p-4 p-sm-5 bg-white">
+    <div class="w-100 animate-slide-up delay-1" style="max-width: 400px;">
+      <div class="mb-5">
+        <div class="badge bg-accent bg-opacity-10 text-accent mb-3 px-3 py-2 rounded-pill fw-800 small tracking-widest">SECURE PORTAL</div>
+        <h2 class="fw-800 text-slate-900 mb-2 fs-1">Welcome back</h2>
+        <p class="text-slate-500">Please enter your credentials to access your dashboard.</p>
+      </div>
+      
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <div class="mb-4">
+          <label class="form-label small fw-800 text-slate-500 text-uppercase tracking-wider">Work Email</label>
+          <div class="input-group">
+            <span class="input-group-text bg-slate-50 border-0 rounded-start-4 px-3"><i class="bi bi-envelope-fill text-slate-400"></i></span>
+            <input type="email" class="form-control bg-slate-50 border-0 rounded-end-4 py-3 px-3 shadow-none fw-600" 
+                   placeholder="name@university.edu" name="email" [ngModel]="email()" (ngModelChange)="email.set($event)" required>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between">
+            <label class="form-label small fw-800 text-slate-500 text-uppercase tracking-wider">Password</label>
+            <a href="#" class="text-accent text-decoration-none small fw-800">Forgot?</a>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text bg-slate-50 border-0 rounded-start-4 px-3"><i class="bi bi-shield-lock-fill text-slate-400"></i></span>
+            <input [type]="showPassword() ? 'text' : 'password'" class="form-control bg-slate-50 border-0 py-3 px-3 shadow-none fw-600" 
+                   placeholder="••••••••" name="password" [ngModel]="password()" (ngModelChange)="password.set($event)" required>
+            <button class="input-group-text bg-slate-50 border-0 rounded-end-4 px-3 text-slate-400" type="button" (click)="togglePassword()">
+              <i class="bi" [ngClass]="showPassword() ? 'bi-eye-slash-fill' : 'bi-eye-fill'"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-4 form-check">
+          <input type="checkbox" class="form-check-input shadow-none" id="rememberMe">
+          <label class="form-check-label text-slate-500 small fw-600" for="rememberMe">Keep me signed in for 2 weeks</label>
+        </div>
+        
+        <div class="alert bg-danger bg-opacity-10 border-0 rounded-4 py-3 text-danger small mb-4 d-flex align-items-center gap-3" *ngIf="errorMessage()">
+          <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+          <span class="fw-bold">{{ errorMessage() }}</span>
+        </div>
+
+        <button type="submit" class="btn btn-premium btn-premium-primary w-100 py-3 mb-4 shadow-xl text-lg" [disabled]="isLoading()">
+          <span *ngIf="isLoading()" class="spinner-border spinner-border-sm me-2"></span>
+          <span class="fw-800 tracking-tight">{{ isLoading() ? 'AUTHENTICATING...' : 'SIGN IN TO PORTAL' }}</span>
+        </button>
+      </form>
+
+      <div class="text-center mt-4">
+        <p class="small text-slate-400 fw-600">Need help with your account? <a href="#" class="text-accent text-decoration-none fw-800">Contact Support</a></p>
+      </div>
+    </div>
+  </div>
+</div>

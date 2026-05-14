@@ -1,0 +1,13 @@
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  
+  <!-- Page Content -->
+  <div id="page-content-wrapper" class="w-100" style="min-height: 100vh; overflow-y: auto;">
+    <app-topnav></app-topnav>
+    
+    <main class="container-fluid py-4 px-md-5">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

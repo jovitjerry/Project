@@ -1,0 +1,71 @@
+<div class="sidebar-wrapper d-flex flex-column h-100" [class.collapsed]="isCollapsed()">
+  <div class="sidebar-heading">
+    <i class="bi bi-mortarboard-fill"></i>
+    <span *ngIf="!isCollapsed()">CMS PRO</span>
+  </div>
+
+  <div class="sidebar-nav flex-grow-1 pt-4">
+    <!-- Admin Links -->
+    <ng-container *ngIf="userRole() === 'admin'">
+      <div class="px-4 py-2 text-slate-400 small fw-bold text-uppercase" *ngIf="!isCollapsed()">Management</div>
+      <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span *ngIf="!isCollapsed()">Dashboard</span>
+      </a>
+      <a routerLink="/admin/manage-students" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-people-fill"></i>
+        <span *ngIf="!isCollapsed()">Students</span>
+      </a>
+      <a routerLink="/admin/manage-faculty" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-person-badge-fill"></i>
+        <span *ngIf="!isCollapsed()">Faculty</span>
+      </a>
+      <a routerLink="/admin/manage-courses" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-journal-text"></i>
+        <span *ngIf="!isCollapsed()">Courses</span>
+      </a>
+    </ng-container>
+
+    <!-- Student Links -->
+    <ng-container *ngIf="userRole() === 'student'">
+      <div class="px-4 py-2 text-slate-400 small fw-bold text-uppercase" *ngIf="!isCollapsed()">Academic</div>
+      <a routerLink="/student/dashboard" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span *ngIf="!isCollapsed()">Dashboard</span>
+      </a>
+      <a routerLink="/student/attendance" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-calendar-check-fill"></i>
+        <span *ngIf="!isCollapsed()">Attendance</span>
+      </a>
+      <a routerLink="/student/results" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-award-fill"></i>
+        <span *ngIf="!isCollapsed()">Results</span>
+      </a>
+    </ng-container>
+
+    <!-- Faculty Links -->
+    <ng-container *ngIf="userRole() === 'teacher'">
+      <div class="px-4 py-2 text-slate-400 small fw-bold text-uppercase" *ngIf="!isCollapsed()">Teaching</div>
+      <a routerLink="/faculty/dashboard" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-grid-1x2-fill"></i>
+        <span *ngIf="!isCollapsed()">Dashboard</span>
+      </a>
+      <a routerLink="/faculty/mark-attendance" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-check2-square"></i>
+        <span *ngIf="!isCollapsed()">Attendance</span>
+      </a>
+      <a routerLink="/faculty/upload-marks" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-file-earmark-bar-graph"></i>
+        <span *ngIf="!isCollapsed()">Marks</span>
+      </a>
+    </ng-container>
+  </div>
+  
+  <div class="sidebar-footer p-3 mt-auto">
+    <button class="btn btn-premium w-100 text-start text-white d-flex align-items-center gap-2" 
+            style="background: rgba(255,255,255,0.05);" (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i>
+      <span *ngIf="!isCollapsed()">Sign Out</span>
+    </button>
+  </div>
+</div>
