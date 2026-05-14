@@ -22,7 +22,8 @@ export class AuthService {
       role: localStorage.getItem('role'),
       userId: localStorage.getItem('userId'),
       email: localStorage.getItem('userEmail'),
-      name: localStorage.getItem('userName')
+      name: localStorage.getItem('userName'),
+      department: localStorage.getItem('userDepartment')
     };
   }
 
@@ -37,13 +38,17 @@ export class AuthService {
           localStorage.setItem('userId', data.userId);
           localStorage.setItem('userEmail', data.email);
           localStorage.setItem('userName', data.full_name);
+          if (data.department) {
+            localStorage.setItem('userDepartment', data.department);
+          }
           
           this.currentUser.set({
             token: data.access_token,
             role: data.role,
             userId: data.userId,
             email: data.email,
-            name: data.full_name
+            name: data.full_name,
+            department: data.department || null
           });
         }
       })
@@ -87,5 +92,9 @@ export class AuthService {
 
   getUserName(): string | null {
     return this.currentUser()?.name || null;
+  }
+
+  getDepartment(): string | null {
+    return this.currentUser()?.department || localStorage.getItem('userDepartment') || null;
   }
 }

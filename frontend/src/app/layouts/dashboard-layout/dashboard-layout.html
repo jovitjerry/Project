@@ -1,13 +1,9 @@
-<div class="d-flex" id="wrapper">
-  <!-- Sidebar -->
-  <app-sidebar></app-sidebar>
+<div class="d-flex flex-column" style="min-height: 100vh; background-color: var(--cms-bg);">
+  <app-topnav></app-topnav>
   
-  <!-- Page Content -->
-  <div id="page-content-wrapper" class="w-100" style="min-height: 100vh; overflow-y: auto;">
-    <app-topnav></app-topnav>
-    
-    <main class="container-fluid py-4 px-md-5">
+  <main class="flex-grow-1">
+    <div class="container-fluid py-4 px-md-5">
       <router-outlet></router-outlet>
-    </main>
-  </div>
+    </div>
+  </main>
 </div>

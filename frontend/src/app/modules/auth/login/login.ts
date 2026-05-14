@@ -43,6 +43,8 @@ export class Login {
           this.router.navigate(['/admin/dashboard']);
         } else if (role === 'teacher') {
           this.router.navigate(['/faculty/dashboard']);
+        } else if (role === 'hod') {
+          this.router.navigate(['/hod/dashboard']);
         } else {
           this.router.navigate(['/student/dashboard']);
         }

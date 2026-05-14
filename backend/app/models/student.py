@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Text, Float
 from sqlalchemy.orm import relationship
 from ..database import Base
 from .base import TimestampMixin
@@ -16,6 +16,8 @@ class Student(Base, TimestampMixin):
     date_of_birth = Column(String) 
     address = Column(Text)
     profile_image = Column(String, nullable=True)
+    cgpa = Column(Float, nullable=True)
+    attendance_percentage = Column(Float, nullable=True)
     
     user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
     user = relationship("User")

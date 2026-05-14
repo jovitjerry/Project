@@ -1,0 +1,112 @@
+/* HOD Dashboard — component-scoped styles */
+
+/* Department badge in header */
+.hod-dept-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--grad-soft);
+  color: var(--cms-accent);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Count badge on section headers */
+.hod-count-badge {
+  background: var(--grad-soft);
+  color: var(--cms-accent);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  font-weight: 700;
+  border-radius: 50px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+}
+
+/* Avatar circle — faculty */
+.hod-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--grad-soft);
+  color: var(--cms-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Avatar circle — students (teal variant) */
+.hod-avatar-student {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), rgba(20, 184, 166, 0.05));
+  color: var(--cms-highlight);
+}
+
+/* Designation badge */
+.hod-role-badge {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  color: #7c3aed;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 50px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Attendance progress bar */
+.hod-progress-track {
+  width: 100%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.hod-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Semester distribution bars */
+.hod-sem-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cms-text-secondary);
+  min-width: 52px;
+}
+
+.hod-sem-bar-track {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.hod-sem-bar-fill {
+  height: 100%;
+  background: var(--grad-accent);
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 4px;
+}
+
+/* Course performance rank badge */
+.hod-rank-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--grad-accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}

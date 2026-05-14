@@ -32,5 +32,12 @@ export const routes: Routes = [
     data: { expectedRoles: ['teacher', 'admin'] },
     loadChildren: () => import('./modules/faculty/faculty.routes').then(m => m.FACULTY_ROUTES)
   },
+  {
+    path: 'hod',
+    component: DashboardLayout,
+    canActivate: [authGuard, roleGuard],
+    data: { expectedRoles: ['hod', 'admin'] },
+    loadChildren: () => import('./modules/hod/hod.routes').then(m => m.HOD_ROUTES)
+  },
   { path: '**', redirectTo: 'auth/login' }
 ];

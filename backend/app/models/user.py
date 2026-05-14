@@ -7,6 +7,7 @@ class UserRole(str, enum.Enum):
     ADMIN = "admin"
     TEACHER = "teacher"
     STUDENT = "student"
+    HOD = "hod"
 
 class User(Base, TimestampMixin):
     __tablename__ = "users"
@@ -18,3 +19,4 @@ class User(Base, TimestampMixin):
     full_name = Column(String)
     is_active = Column(Boolean, default=True)
     profile_image = Column(String, nullable=True)
+    department = Column(String, nullable=True)  # Used by HOD for department filtering

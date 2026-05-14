@@ -57,7 +57,8 @@ def login(user_in: UserLogin, db: Session = Depends(get_db)):
         "userId": db_user.id,        # Always the auth user account ID
         "profileId": profile_id,     # Student/teacher profile record ID
         "email": db_user.email,
-        "full_name": db_user.full_name
+        "full_name": db_user.full_name,
+        "department": db_user.department  # Present for HOD accounts
     }, message="Login successful")
 
 

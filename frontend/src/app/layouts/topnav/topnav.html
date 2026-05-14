@@ -1,24 +1,57 @@
 <nav class="navbar navbar-expand-lg topnav-premium">
-  <div class="container-fluid px-0">
-    <div class="d-flex align-items-center gap-3">
-      <nav aria-label="breadcrumb" class="d-none d-md-block">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-slate-400">RSET</a></li>
-          <li class="breadcrumb-item active fw-medium text-slate-900" aria-current="page">Portal</li>
-        </ol>
-      </nav>
-    </div>
+  <div class="container-fluid px-3">
     
-    <div class="ms-auto d-flex align-items-center gap-4">
-      <!-- Search bar -->
-      <div class="input-group d-none d-lg-flex" style="width: 300px;">
-        <span class="input-group-text border-0 bg-slate-100" style="border-radius: 12px 0 0 12px;">
-          <i class="bi bi-search text-slate-400"></i>
-        </span>
-        <input type="text" class="form-control border-0 bg-slate-100 shadow-none ps-0" 
-               placeholder="Search students, faculty..." 
-               style="border-radius: 0 12px 12px 0; font-size: 0.875rem;">
-      </div>
+    <!-- Logo -->
+    <a class="navbar-brand fw-800 text-accent d-flex align-items-center gap-2 m-0" href="#">
+      <i class="bi bi-mortarboard-fill"></i> CMS PRO
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0 shadow-none px-2 d-lg-none" type="button" (click)="toggleMobileNav()">
+      <i class="bi bi-list fs-2 text-slate-700"></i>
+    </button>
+
+    <!-- Main Navigation (Collapsible) -->
+    <div class="collapse navbar-collapse" [class.show]="isMobileNavOpen()">
+      
+      <!-- Centered Links -->
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 mt-3 mt-lg-0">
+        
+        <!-- Admin Links -->
+        <ng-container *ngIf="userRole() === 'admin'">
+          <li class="nav-item"><a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a></li>
+          <li class="nav-item"><a routerLink="/admin/manage-students" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-people-fill"></i>Students</a></li>
+          <li class="nav-item"><a routerLink="/admin/manage-faculty" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-person-badge-fill"></i>Faculty</a></li>
+          <li class="nav-item"><a routerLink="/admin/manage-courses" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-journal-text"></i>Courses</a></li>
+        </ng-container>
+
+        <!-- HOD Links -->
+        <ng-container *ngIf="userRole() === 'hod'">
+          <li class="nav-item"><a routerLink="/hod/dashboard" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a></li>
+          <li class="nav-item"><a routerLink="/hod/faculty" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-person-badge-fill"></i>Faculty</a></li>
+          <li class="nav-item"><a routerLink="/hod/students" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-people-fill"></i>Students</a></li>
+          <li class="nav-item"><a routerLink="/hod/performance" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-graph-up-arrow"></i>Performance</a></li>
+          <li class="nav-item"><a routerLink="/hod/timetable" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-calendar3"></i>Timetable</a></li>
+          <li class="nav-item"><a routerLink="/hod/grievances" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-exclamation-square-fill"></i>Grievances</a></li>
+          <li class="nav-item"><a routerLink="/hod/notices" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-megaphone-fill"></i>Notices</a></li>
+        </ng-container>
+
+        <!-- Faculty Links -->
+        <ng-container *ngIf="userRole() === 'teacher'">
+          <li class="nav-item"><a routerLink="/faculty/dashboard" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a></li>
+          <li class="nav-item"><a routerLink="/faculty/mark-attendance" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-check2-square"></i>Attendance</a></li>
+          <li class="nav-item"><a routerLink="/faculty/upload-marks" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-file-earmark-bar-graph"></i>Marks</a></li>
+        </ng-container>
+
+        <!-- Student Links -->
+        <ng-container *ngIf="userRole() === 'student'">
+          <li class="nav-item"><a routerLink="/student/dashboard" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a></li>
+          <li class="nav-item"><a routerLink="/student/attendance" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-calendar-check-fill"></i>Attendance</a></li>
+          <li class="nav-item"><a routerLink="/student/results" routerLinkActive="active" class="nav-link-premium" (click)="closeMobileNav()"><i class="bi bi-award-fill"></i>Results</a></li>
+        </ng-container>
+      </ul>
+    
+      <div class="d-flex align-items-center gap-4 mt-3 mt-lg-0 pb-3 pb-lg-0">
 
       <!-- Notifications -->
       <div class="dropdown">
@@ -58,15 +91,16 @@
                alt="User" class="rounded-circle shadow-sm" width="40" height="40">
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow-xl border-0 mt-3 p-2" style="border-radius: 12px; min-width: 200px;">
-          <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2" href="#">
+          <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2" [routerLink]="getProfileRoute()">
             <i class="bi bi-person text-slate-400"></i> My Profile</a></li>
-          <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2" href="#">
+          <li><a class="dropdown-item rounded-3 p-2 d-flex align-items-center gap-2" [routerLink]="getSettingsRoute()">
             <i class="bi bi-gear text-slate-400"></i> Settings</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item rounded-3 p-2 text-danger d-flex align-items-center gap-2" href="javascript:void(0)" (click)="logout()">
             <i class="bi bi-box-arrow-right"></i> Sign Out</a></li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 </nav>

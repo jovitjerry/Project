@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../shared/services/auth.service';
 import { MOCK_DATA } from '../../shared/mock-data';
@@ -7,7 +7,7 @@ import { MOCK_DATA } from '../../shared/mock-data';
 @Component({
   selector: 'app-topnav',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './topnav.html',
   styleUrl: './topnav.scss',
 })
@@ -19,6 +19,7 @@ export class Topnav {
   protected userRole = signal<string>(this.authService.getRole() || 'admin');
   protected notices = signal(MOCK_DATA.notices);
   protected selectedNotice = signal<any>(null);
+  protected isMobileNavOpen = signal<boolean>(false);
 
   constructor() {
     const role = this.userRole();
@@ -26,8 +27,26 @@ export class Topnav {
     if (role === 'teacher') this.userName.set('Dr. Smith');
   }
 
+  toggleMobileNav() {
+    this.isMobileNavOpen.update(v => !v);
+  }
+
+  closeMobileNav() {
+    this.isMobileNavOpen.set(false);
+  }
+
   showNoticeDetails(notice: any) {
     this.selectedNotice.set(notice);
+  }
+
+  getProfileRoute(): string {
+    const role = this.userRole();
+    return `/${role}/profile`;
+  }
+
+  getSettingsRoute(): string {
+    const role = this.userRole();
+    return `/${role}/settings`;
   }
 
   logout() {

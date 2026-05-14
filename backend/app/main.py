@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 import time
 
 from .database import engine, Base
-from .routers import auth, students, teachers, courses, attendance, marks, dashboard
+from .routers import auth, students, teachers, courses, attendance, marks, dashboard, hod
 from .config.config import settings
 from .utils.logging import logger
 from .utils.response import error_response
@@ -59,6 +59,7 @@ app.include_router(teachers.router, prefix=f"{api_v1_prefix}/teachers", tags=["T
 app.include_router(courses.router, prefix=f"{api_v1_prefix}/courses", tags=["Courses"])
 app.include_router(attendance.router, prefix=f"{api_v1_prefix}/attendance", tags=["Attendance"])
 app.include_router(marks.router, prefix=f"{api_v1_prefix}/marks", tags=["Marks"])
+app.include_router(hod.router, prefix=f"{api_v1_prefix}/hod", tags=["HOD"])
 
 @app.get("/api/v1/health", tags=["System"])
 async def health_check():
